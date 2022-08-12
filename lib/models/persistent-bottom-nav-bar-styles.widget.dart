@@ -16,6 +16,7 @@ enum NavBarStyle {
   style13,
   style14,
   style15,
+  style15c,
   style16,
   style17,
   style18,
