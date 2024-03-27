@@ -171,9 +171,7 @@ class PersistentTabView extends PersistentTabViewBase {
         ) {
     assert(itemCount == screens.length,
         "screens and items length should be same. If you are using the onPressed callback function of 'PersistentBottomNavBarItem', enter a dummy screen like Container() in its place in the screens");
-    assert(
-        routeAndNavigatorSettings.navigatorKeys == null ||
-            routeAndNavigatorSettings.navigatorKeys != null && routeAndNavigatorSettings.navigatorKeys!.length != items!.length,
+    assert(routeAndNavigatorSettings.navigatorKeys == null || routeAndNavigatorSettings.navigatorKeys != null && routeAndNavigatorSettings.navigatorKeys!.length != items!.length,
         "Number of 'Navigator Keys' must be equal to the number of bottom navigation tabs.");
   }
 }
@@ -367,8 +365,7 @@ class _PersistentTabViewState extends State<PersistentTabView> {
         ? RouteAndNavigatorSettings(
             defaultTitle: widget.routeAndNavigatorSettings!.defaultTitle,
             initialRoute: widget.routeAndNavigatorSettings!.initialRoute,
-            navigatorKey:
-                widget.routeAndNavigatorSettings!.navigatorKeys == null ? null : widget.routeAndNavigatorSettings!.navigatorKeys![_controller!.index],
+            navigatorKey: widget.routeAndNavigatorSettings!.navigatorKeys == null ? null : widget.routeAndNavigatorSettings!.navigatorKeys![_controller!.index],
             navigatorObservers: widget.routeAndNavigatorSettings!.navigatorObservers,
             onGenerateRoute: widget.routeAndNavigatorSettings!.onGenerateRoute,
             onUnknownRoute: widget.routeAndNavigatorSettings!.onUnknownRoute,
@@ -595,14 +592,13 @@ class _PersistentTabViewState extends State<PersistentTabView> {
   @override
   Widget build(BuildContext context) {
     _navBarHeight =
-        (widget.resizeToAvoidBottomInset && MediaQuery.of(widget.context).viewInsets.bottom > 0 && widget.hideNavigationBarWhenKeyboardShows)
-            ? 0.0
-            : widget.navBarHeight ?? kBottomNavigationBarHeight;
+        (widget.resizeToAvoidBottomInset && MediaQuery.of(widget.context).viewInsets.bottom > 0 && widget.hideNavigationBarWhenKeyboardShows) ? 0.0 : widget.navBarHeight ?? kBottomNavigationBarHeight;
     if (_contextList.length != (widget.itemCount ?? widget.items!.length)) {
       _contextList = List<BuildContext?>.filled((widget.items == null ? widget.itemCount ?? 0 : widget.items!.length), null);
     }
 
     if (widget.handleAndroidBackButtonPress || widget.onWillPop != null) {
+      // ignore: deprecated_member_use
       return WillPopScope(
         onWillPop: !widget.handleAndroidBackButtonPress && widget.onWillPop != null
             ? widget.onWillPop!(_contextList[_controller!.index]) as Future<bool> Function()?
@@ -646,8 +642,7 @@ class _PersistentTabViewState extends State<PersistentTabView> {
 
   void popAllScreens() {
     if (widget.popAllScreensOnTapOfSelectedTab!) {
-      if (widget.items![_controller!.index].onSelectedTabPressWhenNoScreensPushed != null &&
-          !Navigator.of(_contextList[_controller!.index]!).canPop()) {
+      if (widget.items![_controller!.index].onSelectedTabPressWhenNoScreensPushed != null && !Navigator.of(_contextList[_controller!.index]!).canPop()) {
         widget.items![_controller!.index].onSelectedTabPressWhenNoScreensPushed!();
       }
 
@@ -670,10 +665,7 @@ class _PersistentTabViewState extends State<PersistentTabView> {
 //asserts
 
 bool assertMidButtonStyles(NavBarStyle navBarStyle, int itemCount) {
-  if (navBarStyle == NavBarStyle.style15 ||
-      navBarStyle == NavBarStyle.style16 ||
-      navBarStyle == NavBarStyle.style17 ||
-      navBarStyle == NavBarStyle.style18) {
+  if (navBarStyle == NavBarStyle.style15 || navBarStyle == NavBarStyle.style16 || navBarStyle == NavBarStyle.style17 || navBarStyle == NavBarStyle.style18) {
     if (itemCount % 2 != 0) {
       return true;
     } else {
